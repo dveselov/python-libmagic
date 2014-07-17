@@ -1,8 +1,8 @@
-import cffi
-import flags
+from cffi import FFI
+from . import flags
 
 
-ffi = cffi.FFI()
+ffi = FFI()
 ffi.cdef("""
   typedef ... magic_set;
   typedef struct magic_set *magic_t;
@@ -23,7 +23,6 @@ ffi.cdef("""
 """)
 
 magic = ffi.verify("""
-  #include <stdio.h>
   #include <magic.h>
 """, libraries=["magic"])
 
@@ -72,4 +71,8 @@ def file(cookie, path):
 
 def buffer(cookie, value):
   mimetype = magic.magic_buffer(cookie, value, len(value))
-  return ffi.string(mimetype)
+  if mimetype == ffi.NULL:
+    message = error(cookie)
+    raise ValueError(message)
+  else:
+    return ffi.string(mimetype)
