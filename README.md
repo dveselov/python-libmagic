@@ -1,6 +1,6 @@
 # python-libmagic
 
-CFFI bindings to libmagic1.
+CFFI bindings to libmagic.
 
 # Usage
 
