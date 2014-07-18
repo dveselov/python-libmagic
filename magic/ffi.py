@@ -26,6 +26,16 @@ magic = ffi.verify("""
   #include <magic.h>
 """, libraries=["magic"])
 
+def handle_null_exception(function):
+  def wrapper(cookie, *args, **kwargs):
+    response = function(cookie, *args, **kwargs)
+    if response == ffi.NULL:
+      message = error(cookie)
+      raise ValueError(message)
+    else:
+      return ffi.string(response)
+  return wrapper
+
 def version():
   return magic.magic_version()
 
@@ -61,18 +71,12 @@ def load(cookie, path=ffi.NULL):
   else:
     return True
 
+@handle_null_exception
 def file(cookie, path):
   mimetype = magic.magic_file(cookie, path)
-  if mimetype == ffi.NULL:
-    message = error(cookie)
-    raise ValueError(message)
-  else:
-    return ffi.string(mimetype)
+  return mimetype
 
+@handle_null_exception
 def buffer(cookie, value):
   mimetype = magic.magic_buffer(cookie, value, len(value))
-  if mimetype == ffi.NULL:
-    message = error(cookie)
-    raise ValueError(message)
-  else:
-    return ffi.string(mimetype)
+  return mimetype
