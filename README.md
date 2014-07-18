@@ -1,6 +1,6 @@
 # python-libmagic
 
-CFFI bindings to libmagic.
+![magic.h](http://i.imgur.com/GbN8szC.jpg)
 
 # Usage
 
