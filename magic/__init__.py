@@ -32,8 +32,18 @@ class Magic(object):
   def set_flags(self, flags):
     return ffi.set_flags(self.cookie, flags)
 
+  def handle_bytes(function):
+    def wrapper(self, value):
+      if not isinstance(value, bytes):
+        value = value.encode("utf-8")
+      response = function(self, value)
+      return response.decode("utf-8")
+    return wrapper
+
+  @handle_bytes
   def from_file(self, filepath):
     return ffi.file(self.cookie, filepath)
 
+  @handle_bytes
   def from_buffer(self, value):
     return ffi.buffer(self.cookie, value)
