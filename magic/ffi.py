@@ -22,9 +22,9 @@ ffi.cdef("""
   int magic_errno(magic_t);
 """)
 
-magic = ffi.verify("""
-  #include <magic.h>
-""", libraries=["magic"])
+magic = ffi.verify("#include <magic.h>",
+                   libraries=["magic"],
+                   ext_package="magic")
 
 def handle_null_exception(function):
   def wrapper(cookie, *args, **kwargs):
