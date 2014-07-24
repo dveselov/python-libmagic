@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+include setup.py
+include magic/__init__.py
+include magic/ffi.py
+include magic/flags.py
