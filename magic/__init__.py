@@ -1,7 +1,7 @@
 from . import ffi
 from . import flags
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 class Magic(object):
@@ -29,7 +29,7 @@ class Magic(object):
   def version(self):
     return ffi.version()
 
-  def set_flags(self, flags):
+  def set_flags(self):
     return ffi.set_flags(self.cookie, flags)
 
   def handle_bytes(function):
