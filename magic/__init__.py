@@ -6,13 +6,21 @@ __version__ = "0.2.0"
 
 class Magic(object):
 
-  def __init__(self, mime=False, debug=False, database=None):
-    initial_flags = flags.MAGIC_NONE
-    if mime:
-      initial_flags |= flags.MAGIC_MIME_TYPE
+  def __init__(self, database=None, debug=False, mimetype=False, encoding=False,
+                     compress=False, follow_symlinks=False):
+    initial = flags.MAGIC_NONE
     if debug:
-      initial_flags |= flags.MAGIC_DEBUG
-    cookie = ffi.open(initial_flags)
+      initial |= flags.MAGIC_DEBUG
+    if mimetype:
+      if encoding:
+        initial |= flags.MAGIC_MIME
+      else:
+        initial |= flags.MAGIC_MIME_TYPE
+    if compress:
+      initial |= flags.MAGIC_COMPRESS
+    if follow_symlinks:
+      initial |= flags.MAGIC_SYMLINK
+    cookie = ffi.open(initial)
     if database:
       ffi.load(cookie, database)
     else:
@@ -29,7 +37,7 @@ class Magic(object):
   def version(self):
     return ffi.version()
 
-  def set_flags(self):
+  def set_flags(self, flags):
     return ffi.set_flags(self.cookie, flags)
 
   def handle_bytes(function):
