@@ -8,7 +8,7 @@
 import magic
 import magic.flags
 
-magic = magic.Magic(mime=True)
+magic = magic.Magic(mimetype=True)
 
 mimetype = magic.from_buffer("\x89\x50\x4E\x47\x0D\x0A\x1A\x0A")
 print mimetype # => "image/png"
