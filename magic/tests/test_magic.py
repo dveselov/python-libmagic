@@ -20,6 +20,11 @@ class MagicTestCase(unittest.TestCase):
     mimetype = self.magic.from_file("/etc/passwd")
     self.assertEqual(mimetype, "ASCII text")
 
+  def test_with(self):
+    with magic.Magic(mimetype=True) as m:
+      mimetype = self.magic.from_file("/etc/passwd")
+      self.assertEqual(mimetype, "text/plain")
+
   def test_set_flags(self):
     mimetype = self.magic.from_file("/etc/passwd")
     self.assertEqual(mimetype, "ASCII text")
