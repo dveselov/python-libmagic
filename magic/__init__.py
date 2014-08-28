@@ -32,6 +32,9 @@ class Magic(object):
       ffi.close(self.cookie)
     except Exception as exception:
       raise
+  
+  def __exit__(self):
+    del self
 
   @property
   def version(self):
