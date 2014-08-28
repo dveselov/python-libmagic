@@ -33,6 +33,9 @@ class Magic(object):
     except Exception as exception:
       raise
   
+  def __enter__(self):
+    return self
+  
   def __exit__(self):
     del self
 
