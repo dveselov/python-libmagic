@@ -9,7 +9,6 @@ import magic
 
 with magic.Magic(mimetype=True) as m:
     print m.from_buffer("hello") # => "text/plain"
-
 ```
 
 ```python
