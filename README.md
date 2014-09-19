@@ -31,6 +31,8 @@ print mimetype # => "Microsoft Word 2007+"
 
 # Installation
 
+`python-libmagic` works on CPython 2.7/3.3+ and PyPy.
+
 ```bash
 $ apt-get install libmagic-dev
 $ pip install python-libmagic
