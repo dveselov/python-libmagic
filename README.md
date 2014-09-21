@@ -25,7 +25,7 @@ print mimetype # => "text/plain"
 
 updated = magic.set_flags(magic.flags.MAGIC_NONE)
 print updated # => True
-mimetype = magic.from_filepath("demo.docx")
+mimetype = magic.from_file("demo.docx")
 print mimetype # => "Microsoft Word 2007+"
 ```
 
