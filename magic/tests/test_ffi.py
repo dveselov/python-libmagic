@@ -10,17 +10,17 @@ class FFITestCase(unittest.TestCase):
     self.assertTrue(isinstance(version, int))
 
   def test_open(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
 
   def test_close(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
     closed = magic.ffi.close(cookie)
     self.assertTrue(closed)
 
   def test_load(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
     with self.assertRaises(ValueError):
       loaded = magic.ffi.load(cookie, b"/etc/magic_database")
@@ -28,17 +28,15 @@ class FFITestCase(unittest.TestCase):
     self.assertTrue(loaded)
 
   def test_file(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
     loaded = magic.ffi.load(cookie)
     self.assertTrue(loaded)
-    with self.assertRaises(ValueError):
-      mimetype = magic.ffi.file(cookie, b"/etc/magic_database")
     mimetype = magic.ffi.file(cookie, b"/etc/passwd")
     self.assertEqual(mimetype, b"ASCII text")
 
   def test_buffer(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
     loaded = magic.ffi.load(cookie)
     self.assertTrue(loaded)
@@ -50,7 +48,7 @@ class FFITestCase(unittest.TestCase):
     self.assertEqual(mimetype, b"PNG image data")
 
   def test_set_flags(self):
-    cookie = magic.ffi.open()
+    cookie = magic.ffi.open(magic.flags.MAGIC_NONE)
     self.assertNotEqual(cookie, None)
     loaded = magic.ffi.load(cookie)
     self.assertTrue(loaded)

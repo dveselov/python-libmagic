@@ -7,7 +7,7 @@ import magic.flags
 class MagicTestCase(unittest.TestCase):
 
   def setUp(self):
-    self.magic = magic.Magic()
+    self.magic = magic.Magic(magic.flags.MAGIC_NONE)
 
   def test_get_version(self):
     self.assertTrue(isinstance(self.magic.version, int))
@@ -21,7 +21,8 @@ class MagicTestCase(unittest.TestCase):
     self.assertEqual(mimetype, "ASCII text")
 
   def test_with(self):
-    with magic.Magic(mimetype=True) as m:
+    with magic.Magic() as m:
+      self.magic.set_flags(magic.flags.MAGIC_MIME_TYPE)
       mimetype = self.magic.from_file("/etc/passwd")
       self.assertEqual(mimetype, "text/plain")
 

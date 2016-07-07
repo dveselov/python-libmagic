@@ -51,7 +51,7 @@ def error(cookie):
   message = magic.magic_error(cookie)
   return ffi.string(message)
 
-def open(flags=flags.MAGIC_NONE):
+def open(flags):
   cookie = magic.magic_open(flags)
   if cookie == ffi.NULL:
     message = error(cookie)
