@@ -27,6 +27,7 @@ updated = magic.set_flags(magic.flags.MAGIC_NONE)
 print updated # => True
 mimetype = magic.from_file("demo.docx")
 print mimetype # => "Microsoft Word 2007+"
+magic.close() # don't forget about this
 ```
 
 # Installation
