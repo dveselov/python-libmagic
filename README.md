@@ -7,7 +7,7 @@
 ```python
 import magic
 
-with magic.Magic(mimetype=True) as m:
+with magic.Magic() as m:
     print m.from_buffer("hello") # => "text/plain"
 ```
 
@@ -15,8 +15,7 @@ with magic.Magic(mimetype=True) as m:
 import magic
 import magic.flags
 
-magic = magic.Magic(mimetype=True)
-
+magic = magic.Magic()
 mimetype = magic.from_buffer("\x89\x50\x4E\x47\x0D\x0A\x1A\x0A")
 print mimetype # => "image/png"
 
