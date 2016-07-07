@@ -6,7 +6,7 @@ setup(**{
   "url": "https://github.com/dveselov/python-libmagic",
   "author": "Dmitry Veselov",
   "author_email": "d.a.veselov@yandex.ru",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Python bindings to libmagic",
   "license": "MIT",
   "classifiers": (
