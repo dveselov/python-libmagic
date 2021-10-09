@@ -1,5 +1,8 @@
 from setuptools import setup
 
+with open('requirements.txt') as f:
+	requirements = f.read().splitlines()
+
 setup(**{
   "name": "python-libmagic",
   "packages": ["magic"],
@@ -16,7 +19,5 @@ setup(**{
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
   ),
-  "install_requires": [
-    "cffi==1.7.0",
-  ],
+  "install_requires": requirements,
 })
