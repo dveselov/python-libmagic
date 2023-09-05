@@ -1,30 +1,5 @@
-from cffi import FFI
-from . import flags
+from ._magic import ffi, lib as magic
 
-
-ffi = FFI()
-ffi.cdef("""
-  typedef ... magic_set;
-  typedef struct magic_set *magic_t;
-  magic_t magic_open(int);
-  void magic_close(magic_t);
-  const char *magic_getpath(const char *, int);
-  const char *magic_file(magic_t, const char *);
-  const char *magic_descriptor(magic_t, int);
-  const char *magic_buffer(magic_t, const void *, size_t);
-  const char *magic_error(magic_t);
-  int magic_setflags(magic_t, int);
-  int magic_version(void);
-  int magic_load(magic_t, const char *);
-  int magic_compile(magic_t, const char *);
-  int magic_check(magic_t, const char *);
-  int magic_list(magic_t, const char *);
-  int magic_errno(magic_t);
-""")
-
-magic = ffi.verify("#include <magic.h>",
-                   libraries=["magic"],
-                   ext_package="magic")
 
 def handle_null_exception(function):
   def wrapper(cookie, *args, **kwargs):
@@ -45,7 +20,7 @@ def set_flags(cookie, flags):
     message = error(cookie)
     raise ValueError(message)
   else:
-    return True 
+    return True
 
 def error(cookie):
   message = magic.magic_error(cookie)
@@ -57,7 +32,7 @@ def open(flags):
     message = error(cookie)
     raise RuntimeError(message)
   else:
-    return cookie 
+    return cookie
 
 def close(cookie):
   closed = magic.magic_close(cookie)

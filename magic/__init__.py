@@ -1,7 +1,6 @@
-from . import ffi
-from . import flags
+from magic import ffi, flags
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 
 class Magic(object):
@@ -19,10 +18,10 @@ class Magic(object):
       ffi.close(self.cookie)
     except Exception as exception:
       raise
-  
+
   def __enter__(self):
     return self
-  
+
   def __exit__(self, type, value, traceback):
     del self
 
